@@ -1,4 +1,3 @@
-
 #![no_std]
 #![no_main]
 #![feature(custom_test_frameworks)]
@@ -6,26 +5,20 @@
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
-use ligt_os::{println};
+use ligt_os::println;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
-    println!("Hello World{}", "!");
-
-    #[cfg(test)]
     test_main();
 
     loop {}
 }
 
-#[cfg(not(test))]
-#[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
-    println!("{}", info);
-    loop {}
+#[test_case]
+fn test_println() {
+    println!("test_println output");
 }
 
-#[cfg(test)]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     ligt_os::test_panic_handler(info)
