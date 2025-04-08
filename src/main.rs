@@ -1,4 +1,3 @@
-
 #![no_std]
 #![no_main]
 #![feature(custom_test_frameworks)]
@@ -6,16 +5,13 @@
 #![reexport_test_harness_main = "test_main"]
 
 use core::panic::PanicInfo;
-use ligt_os::{println};
+use ligt_os::println;
 
 #[unsafe(no_mangle)]
 pub extern "C" fn _start() -> ! {
     println!("Hello World{}", "!");
 
     ligt_os::init(); // new
-
-    // invoke a breakpoint exception
-    x86_64::instructions::interrupts::int3(); // new
 
     // as before
     #[cfg(test)]
