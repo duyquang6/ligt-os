@@ -11,9 +11,8 @@ use ligt_os::{hlt_loop, println};
 pub extern "C" fn _start() -> ! {
     println!("Hello World{}", "!");
 
-    ligt_os::init(); // new
+    ligt_os::init();
 
-    // as before
     #[cfg(test)]
     test_main();
 
